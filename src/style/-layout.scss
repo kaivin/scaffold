@@ -1,0 +1,154 @@
+﻿.app-wrapper{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  @include clearfix;
+}
+
+
+
+$subMenuActiveText: #f4f4f5;
+$menuBg: #1b2a47;
+$menuHover: #2a395b;
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
+$sideBarWidth: 210px;
+$navTextColor: #fff;
+$menuText: #7a80b4;
+$menuActiveText: #7a80b4;
+
+.main-container {
+  min-height: 100%;
+  padding-left:  $sideBarWidth;
+  transition: padding-left .28s;
+  position: relative;
+}
+
+.fixed-header {
+  position: fixed;
+  left: $sideBarWidth;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  transition: left 0.28s;
+}
+
+.main-hidden {
+  margin-left: 0 !important;
+
+  .fixed-header {
+    width: 100% !important;
+
+    + .app-main {
+      padding-top: 37px;
+    }
+  }
+}
+
+.el-popper.is-light {
+  border: none !important;
+}
+
+.sidebar-container {
+  transition: width 0.28s;
+  width: $sideBarWidth;
+  background-color: $menuBg;
+  height: 100%;
+  position: fixed;
+  font-size: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  overflow: hidden;
+  box-shadow: 0 0 1px #888;
+
+  .scrollbar-wrapper {
+    overflow-x: hidden !important;
+  }
+
+  .horizontal-collapse-transition {
+    transition: 0s width ease-in-out, 0s padding-left ease-in-out,
+      0s padding-right ease-in-out;
+  }
+
+  .el-scrollbar__bar.is-vertical {
+    right: 0;
+  }
+
+  .el-scrollbar {
+    height: 100%;
+  }
+
+  &.has-logo {
+    .el-scrollbar {
+      height: calc(100% - 50px);
+    }
+  }
+
+  .is-horizontal {
+    display: none;
+  }
+
+  a {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .el-menu {
+    border: none;
+    height: 100%;
+    background-color: transparent !important;
+  }
+  .el-sub-menu__icon-arrow{
+    position: absolute !important;
+  }
+  .el-menu-item,
+  .el-sub-menu__title {
+    color: $menuText;
+  }
+
+  // menu hover
+  .submenu-title-noDropdown,
+  .el-sub-menu__title {
+    // background: $menuBg;
+
+    &:hover {
+      background-color: $menuHover !important;
+    }
+  }
+
+  .is-active > .el-sub-menu__title,
+  .is-active.submenu-title-noDropdown {
+    color: $subMenuActiveText !important;
+
+    i {
+      color: $subMenuActiveText !important;
+    }
+  }
+
+  .is-active {
+    transition: color 0.3s;
+    color: $subMenuActiveText !important;
+  }
+
+  .el-menu .el-menu--inline .el-sub-menu__title,
+  & .el-sub-menu .el-menu-item {
+    font-size: 12px;
+    min-width: $sideBarWidth !important;
+    background-color: $subMenuBg !important;
+
+    &:hover {
+      background-color: $subMenuHover !important;
+    }
+  }
+}
+.el-scrollbar__wrap {
+  overflow: auto;
+  height: 100%;
+}
+
+.fixed-header + .app-main {
+  padding-top: 86px;
+}

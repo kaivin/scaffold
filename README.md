@@ -18,7 +18,8 @@ node14.18.1 + volar + vite2.x + vue3.x + vue-router4.x + vuex4.x + element-plus 
 
 # 配置步骤
 
-1. [详细步骤][1] 
+1. [初始化基础配置][1] 
+
 [1]:https://github.com/kaivin/scaffold/blob/main/public/doc/01初始化基础配置.md "初始化基础配置" 
 
 ## 命令

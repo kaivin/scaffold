@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
 import Logo from "./logo/index.vue"
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref,computed,reactive } from 'vue'
 import {
   Location,
   Document,
@@ -16,6 +16,9 @@ export default defineComponent({
     IconMenu,
     Logo,
   },
+  created(){
+    
+  },
   setup() {
     const isCollapse = ref(false)
     const handleOpen = (key:any, keyPath:any) => {
@@ -28,6 +31,7 @@ export default defineComponent({
       isCollapse,
       handleOpen,
       handleClose,
+      
     }
   },
   methods:{
@@ -38,47 +42,42 @@ export default defineComponent({
   }
 })
 </script>
+<script setup lang="ts">
+import { useStore } from 'vuex'
+import { useRoute, useRouter } from "vue-router";
+const route = useRoute();
+const store = useStore()
+const menuList = store.state.routes.wholeRoutes
+console.log(menuList,"路由菜单")
+const activeMenu = computed((): string => {
+  const { meta, path } = route;
+  if (meta.activeMenu) {
+    // @ts-ignore
+    return meta.activeMenu;
+  }
+  return path;
+});
 
+</script>
 <template>
   <div class="sidebar-container">
     <Logo />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        default-active="1"
-        class="el-menu-vertical-demo"
-        :collapse="isCollapse"
-        @open="handleOpen"
-        @close="handleClose"
+        :default-active="activeMenu"
+        unique-opened
+        router
+        :collapse-transition="false"
+        mode="vertical"
+        class="outer-most"
       >
-        <el-menu-item class="submenu-title-noDropdown" index="1" v-on:click="routerLink('/')">
-          <el-icon><icon-menu /></el-icon>
-          <template #title>home</template>
-        </el-menu-item>
-        <el-sub-menu index="2">
-          <template #title>
-            <el-icon><location /></el-icon>
-            <span>Navigator One</span>
-          </template>
-          <el-sub-menu index="2-1">
-            <template #title>
-              <span>Navigator two</span>
-            </template>
-            <el-menu-item index="2-1-1" v-on:click="routerLink('/nested/menu1/menu1-1')">item one</el-menu-item>
-            <el-sub-menu index="2-1-2">
-              <template #title>
-                <span>Navigator three</span>
-              </template>
-              <el-menu-item index="2-1-2-1" v-on:click="routerLink('/nested/menu1/menu1-2/menu1-2-1')">item one</el-menu-item>
-              <el-menu-item index="2-1-2-2" v-on:click="routerLink('/nested/menu1/menu1-2/menu1-2-2')">item two</el-menu-item>
-            </el-sub-menu>
-            <el-menu-item index="2-1-3" v-on:click="routerLink('/nested/menu1/menu1-3')">item three</el-menu-item>
-          </el-sub-menu>
-          <el-menu-item index="2-2" v-on:click="routerLink('/nested/menu2')">item four</el-menu-item>
-        </el-sub-menu>
-        <el-menu-item class="submenu-title-noDropdown" index="3" v-on:click="routerLink('/demo')">
-          <el-icon><setting /></el-icon>
-          <template #title>demo</template>
-        </el-menu-item>
+        <sidebar-item
+          v-for="route in menuList"
+          :key="route.path"
+          :item="route"
+          class="outer-most"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>

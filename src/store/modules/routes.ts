@@ -15,11 +15,13 @@ const routesModule: Module<Routes,any> = {
     // 获取所有路由（静态+动态获取部分）
     asyncActionRoutes({state},routes) {
       if(state.wholeRoutes.length > 0){
+          console.log(state.wholeRoutes,"vuex中路由1")
         return;
       }
       state.wholeRoutes = filterTree(
         ascending(ascending(constantRoutesArr).concat(routes))
       );
+      console.log(state.wholeRoutes,"vuex中路由2")
     },
   }
 };

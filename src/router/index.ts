@@ -75,11 +75,11 @@ export const router: Router = createRouter({
 export const initRouter = () => {
   return new Promise(resolve => {
     getAsyncRoutes().then((data:any) => {
-      console.log(data,"动态路由");
-      if (data.length === 0) {
-        store.dispatch('routes/asyncActionRoutes',data);
+      console.log(data.data,"动态路由");
+      if (data.data.length === 0) {
+        store.dispatch('routes/asyncActionRoutes',data.data);
       } else {
-        addAsyncRoutes(data,true)?.map((v: any) => {
+        addAsyncRoutes(data.data,true)?.map((v: any) => {
           // 防止重复添加路由
           if (router.options.routes.findIndex(value => value.path === v.path) !== -1) {
             return;
@@ -89,7 +89,7 @@ export const initRouter = () => {
             // 最终路由进行升序
             ascending(router.options.routes);
             router.addRoute(v.name, v);
-            store.dispatch('routes/asyncActionRoutes',data);
+            store.dispatch('routes/asyncActionRoutes',data.data);
           }
           resolve(router);
         });
@@ -125,17 +125,17 @@ router.beforeEach((to, _from, next) => {
         initRouter().then((router: Router) => {
           router.push(to.path);
           // 刷新页面更新标签栏与页面路由匹配
-          const localRoutes = storageLocal.getItem("responsive-routesInStorage");
-          const optionsRoutes = router.options?.routes;
-          const newLocalRoutes = [];
-          optionsRoutes.forEach(ors => {
-            localRoutes.forEach(lrs => {
-              if (ors.path === lrs.parentPath) {
-                newLocalRoutes.push(lrs);
-              }
-            });
-          });
-          storageLocal.setItem("responsive-routesInStorage",uniqBy(newLocalRoutes, "path"));
+        //   const localRoutes = storageLocal.getItem("responsive-routesInStorage");
+        //   const optionsRoutes = router.options?.routes;
+        //   const newLocalRoutes = [];
+        //   optionsRoutes.forEach(ors => {
+        //     localRoutes.forEach(lrs => {
+        //       if (ors.path === lrs.parentPath) {
+        //         newLocalRoutes.push(lrs);
+        //       }
+        //     });
+        //   });
+        //   storageLocal.setItem("responsive-routesInStorage",uniqBy(newLocalRoutes, "path"));
         });
       }
       next();

@@ -1,14 +1,12 @@
-﻿<script setup lang="ts">
-import path from "path";
-import { PropType, ref, nextTick, getCurrentInstance } from "vue";
+﻿<script lang="ts">
+export default {
+  name: "sidebar-item"
+};
+</script>
+<script setup lang="ts">
+import path from 'path-browserify'
+import { PropType, ref, nextTick } from "vue";
 import { childrenType } from "../../types";
-import { useAppStoreHook } from "/@/store/modules/app";
-import Icon from "/@/components/ReIcon/src/Icon.vue";
-import { getMessage } from "/@/utils/i18n";
-import { findIconReg } from "/@/components/ReIcon";
-const instance = getCurrentInstance().appContext.app.config.globalProperties;
-const menuMode = instance.$storage.layout?.layout === "vertical";
-const pureApp = useAppStoreHook();
 
 const props = defineProps({
   item: {
@@ -43,7 +41,6 @@ function hoverMenu(key) {
       : Object.assign(key, {
           showTooltip: false
         });
-
     hoverMenuMap.set(key, true);
   });
 }
@@ -79,99 +76,64 @@ function resolvePath(routePath) {
 </script>
 
 <template>
-  <template
-    v-if="
-      hasOneShowingChild(props.item.children, props.item) &&
-      (!onlyOneChild.children || onlyOneChild.noShowingChildren)
-    "
-  >
+  <template v-if="hasOneShowingChild(props.item.children, props.item)&&(!onlyOneChild.children || onlyOneChild.noShowingChildren)">
     <el-menu-item
       :index="resolvePath(onlyOneChild.path)"
       :class="{ 'submenu-title-noDropdown': !isNest }"
       style="display: flex; align-items: center"
     >
-      <el-icon v-show="props.item.meta.icon">
-        <component
-          :is="
-            findIconReg(
-              onlyOneChild.meta.icon ||
-                (props.item.meta && props.item.meta.icon)
-            )
-          "
-        ></component>
-      </el-icon>
       <template #title>
         <div
           :style="{
-            width: pureApp.sidebar.opened ? '' : '100%',
+            width: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             overflow: 'hidden'
           }"
         >
-          <span v-if="!menuMode">{{
-            getMessage(onlyOneChild.meta.title, onlyOneChild.meta.i18n)
-          }}</span>
           <el-tooltip
-            v-else
             placement="top"
             :offset="-10"
             :disabled="!onlyOneChild.showTooltip"
           >
             <template #content>
-              {{ getMessage(onlyOneChild.meta.title, onlyOneChild.meta.i18n) }}
+              {{ onlyOneChild.meta.title }}
             </template>
             <span
               ref="menuTextRef"
               :style="{
-                width: pureApp.sidebar.opened ? '125px' : '',
+                width: '125px',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis'
               }"
               @mouseover="hoverMenu(onlyOneChild)"
             >
-              {{ getMessage(onlyOneChild.meta.title, onlyOneChild.meta.i18n) }}
+              {{ onlyOneChild.meta.title }}
             </span>
           </el-tooltip>
-          <Icon
-            v-if="onlyOneChild.meta.extraIcon"
-            :svg="onlyOneChild.meta.extraIcon.svg ? true : false"
-            :content="`${onlyOneChild.meta.extraIcon.name}`"
+          <svg-icon
+            v-if="props.item.meta.extraIcon"
+            :icon-class="`${props.item.meta.extraIcon.name}`"
           />
         </div>
       </template>
     </el-menu-item>
   </template>
 
-  <el-sub-menu
-    v-else
-    ref="subMenu"
-    :index="resolvePath(props.item.path)"
-    popper-append-to-body
-  >
+  <el-sub-menu v-else ref="subMenu" :index="resolvePath(props.item.path)" popper-append-to-body>
     <template #title>
-      <el-icon v-show="props.item.meta.icon" :class="props.item.meta.icon">
-        <component
-          :is="findIconReg(props.item.meta && props.item.meta.icon)"
-        ></component>
-      </el-icon>
-      <span v-if="!menuMode">{{
-        getMessage(props.item.meta.title, props.item.meta.i18n)
-      }}</span>
       <el-tooltip
-        v-else
         placement="top"
         :offset="-10"
-        :disabled="!pureApp.sidebar.opened || !props.item.showTooltip"
+        :disabled="!props.item.showTooltip"
       >
         <template #content>
-          {{ getMessage(props.item.meta.title, props.item.meta.i18n) }}
+          {{ props.item.meta.title }}
         </template>
         <div
           ref="menuTextRef"
           :style="{
-            width: pureApp.sidebar.opened ? '125px' : '',
             display: 'inline-block',
             overflow: 'hidden',
             textOverflow: 'ellipsis'
@@ -179,14 +141,13 @@ function resolvePath(routePath) {
           @mouseover="hoverMenu(props.item)"
         >
           <span style="overflow: hidden; text-overflow: ellipsis">
-            {{ getMessage(props.item.meta.title, props.item.meta.i18n) }}
+            {{ props.item.meta.title }}
           </span>
         </div>
       </el-tooltip>
-      <Icon
+      <svg-icon
         v-if="props.item.meta.extraIcon"
-        :svg="props.item.meta.extraIcon.svg ? true : false"
-        :content="`${props.item.meta.extraIcon.name}`"
+        :icon-class="`${props.item.meta.extraIcon.name}`"
       />
     </template>
     <sidebar-item

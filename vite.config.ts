@@ -31,6 +31,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 				'@': resolve('src'),
         '#': resolve('types'),
 			}
-		}
+		},
 	}
 }

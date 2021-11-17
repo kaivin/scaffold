@@ -47,11 +47,10 @@ let className = computed(() => {
       : ["fa", props.content];
   } else if (props.content.indexOf("el-icon-") > -1) {
     return props.content;
-  } else if (props.content.indexOf("#") > -1) {
+  } else if (props.content.indexOf("iconfont-") > -1) {
     // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-    text.value = props.content;
-    return "iconfont";
-  } else {
+    return ["iconfont", "icon-"+props.content.split('iconfont-')[1]];
+  }else {
     // eslint-disable-next-line vue/no-side-effects-in-computed-properties
     text.value = props.content;
     return "";
@@ -79,7 +78,7 @@ const clickHandle = () => {
 
 <template>
   <i
-    v-if="!props.svg"
+    v-if="!props.svg&&props.content.indexOf('svg-icon-')===-1"
     :class="className"
     :style="iconStyle"
     v-html="text"
@@ -87,11 +86,12 @@ const clickHandle = () => {
   ></i>
   <svg
     class="icon-svg"
-    v-if="props.svg"
+    v-if="props.svg&&props.content.indexOf('svg-icon-')===-1"
     aria-hidden="true"
     :style="iconStyle"
     @click="clickHandle"
   >
     <use :xlink:href="`#${props.content}`" />
   </svg>
+  <svg-icon v-if="props.svg&&props.content.indexOf('svg-icon-')>-1" :icon-class="props.content.split('svg-icon-')[1]"></svg-icon>
 </template>

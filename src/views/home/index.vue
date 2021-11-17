@@ -15,9 +15,12 @@ const value1 = ref("")
     <el-button type="primary">Primary</el-button>
     <el-icon><component :is="findIconReg('fa-address-book')"></component></el-icon>
     <Icon :content="'fa-address-book'"/>
-    <Icon :svg="true" :content="'icon-ad'"/>
+    <Icon :svg="true" :content="'icon-star'"/>
+    <Icon :content="'iconfont-star'"/>
+    <el-icon><component :is="findIconReg('HomeFilled')"></component></el-icon>
+    <Icon :content="'el-icon-user'"/>
+    <Icon :svg="true" :content="'svg-icon-close'"/>
     <svg-icon icon-class="close"></svg-icon>
-    <el-icon><kevin-zoom-out /></el-icon>
     <el-date-picker v-model="value1" type="date" placeholder="Pick a day"></el-date-picker>
   </div>
 </template>

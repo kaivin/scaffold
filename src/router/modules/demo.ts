@@ -17,7 +17,7 @@ const router = {
       meta: {
         title: "demo小样",
         showLink: true,
-        sort:1
+        sort:2
       }
     }
   ]

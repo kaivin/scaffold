@@ -4,6 +4,7 @@ import path from 'path'
 import ElementPlus from "unplugin-element-plus/vite";
 import { svgBuilder } from './src/plugins/svgBuilder/index';
 import { viteMockServe } from "vite-plugin-mock";
+import svgLoader from "vite-svg-loader";
 const resolve = (dir: string) => path.join(__dirname, dir)
 // https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
@@ -13,6 +14,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 			vue(),
 			[svgBuilder('./src/assets/icons/svg/')],
 			ElementPlus({}),
+      svgLoader(),
 			viteMockServe({
 				mockPath: "./mock", // 模拟接口api文件存放的文件夹
 				watchFiles: true, // 将监视文件夹中的文件更改。 并实时同步到请求结果
@@ -30,7 +32,12 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 			alias: {
 				'@': resolve('src'),
         '#': resolve('types'),
+				'vue':'vue/dist/vue.esm-bundler.js'
 			}
 		},
+    define: {
+			'process.env': {},
+      __INTLIFY_PROD_DEVTOOLS__: false
+    }
 	}
 }

@@ -75,7 +75,6 @@ export const router: Router = createRouter({
 export const initRouter = () => {
   return new Promise(resolve => {
     getAsyncRoutes().then((data:any) => {
-      console.log(data.data,"动态路由");
       if (data.data.length === 0) {
         store.dispatch('routes/asyncActionRoutes',data.data);
       } else {
@@ -124,18 +123,6 @@ router.beforeEach((to, _from, next) => {
       if (store.state.routes.wholeRoutes.length === 0){
         initRouter().then((router: Router) => {
           router.push(to.path);
-          // 刷新页面更新标签栏与页面路由匹配
-        //   const localRoutes = storageLocal.getItem("responsive-routesInStorage");
-        //   const optionsRoutes = router.options?.routes;
-        //   const newLocalRoutes = [];
-        //   optionsRoutes.forEach(ors => {
-        //     localRoutes.forEach(lrs => {
-        //       if (ors.path === lrs.parentPath) {
-        //         newLocalRoutes.push(lrs);
-        //       }
-        //     });
-        //   });
-        //   storageLocal.setItem("responsive-routesInStorage",uniqBy(newLocalRoutes, "path"));
         });
       }
       next();

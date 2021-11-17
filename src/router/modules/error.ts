@@ -9,7 +9,7 @@ const errorRouter = {
     icon: "el-icon-position",
     title: "错误页面",
     showLink: true,
-    rank: 7
+    sort: 7
   },
   children: [
     {

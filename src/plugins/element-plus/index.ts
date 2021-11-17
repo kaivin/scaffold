@@ -1,4 +1,4 @@
-﻿import { App } from "vue";
+﻿import { App, Component } from "vue";
 import {
   ElTag,
   ElAffix,
@@ -31,17 +31,33 @@ import {
   ElDrawer,
   ElPagination,
   ElAlert,
+  ElRadio,
   ElRadioButton,
   ElRadioGroup,
   ElDescriptions,
   ElDescriptionsItem,
-	ElInfiniteScroll,
-  ElMessage,
-  ElMessageBox,
-  ElNotification,
+  ElBacktop,
+  ElSwitch
 } from "element-plus";
 
-const components = [
+import {
+  Check,
+  Menu,
+  HomeFilled,
+  SetUp,
+  Edit,
+  Setting,
+  Lollipop,
+  Link,
+  Position,
+  Histogram,
+  RefreshRight,
+  ArrowDown,
+  Close,
+  CloseBold
+} from "@element-plus/icons";
+
+const components:any[] = [
   ElTag,
   ElAffix,
   ElSkeleton,
@@ -72,16 +88,36 @@ const components = [
   ElDrawer,
   ElPagination,
   ElAlert,
+  ElRadio,
   ElRadioButton,
   ElRadioGroup,
   ElDescriptions,
-  ElDescriptionsItem
+  ElDescriptionsItem,
+  ElBacktop,
+  ElSwitch
 ];
-
-const plugins = [ElInfiniteScroll, ElLoading, ElMessage, ElMessageBox, ElNotification];
+// icon
+export const iconComponents = [
+  Check,
+  Menu,
+  HomeFilled,
+  SetUp,
+  Edit,
+  Setting,
+  Lollipop,
+  Link,
+  Position,
+  Histogram,
+  RefreshRight,
+  ArrowDown,
+  Close,
+  CloseBold
+];
+const plugins = [ElLoading];
 
 export function useElementPlus(app: App) {
-    components.forEach((component: any) => {
+    components.push(...iconComponents);
+    components.forEach((component: Component) => {
         app.component(component.name, component);
     });
     plugins.forEach(plugin => {

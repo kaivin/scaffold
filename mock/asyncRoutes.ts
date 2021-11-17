@@ -9,7 +9,7 @@ const systemRouter = {
     icon: "menu-system",
     title: "设置",
     showLink: true,
-    sort: 6
+    sort: 10
   },
   children: [
     {

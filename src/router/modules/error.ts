@@ -6,7 +6,8 @@ const errorRouter = {
   component: Layout,
   redirect: "/error/401",
   meta: {
-    icon: "el-icon-position",
+    icon: "Position",
+    isComponent:true,
     title: "错误页面",
     showLink: true,
     sort: 7

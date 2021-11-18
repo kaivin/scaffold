@@ -5,6 +5,8 @@ const router = {
   name: "layout",
   component: Layout,
   meta: {
+    icon:'fa-house-damage',
+    isComponent:true,
     showLink: true,
     sort:1
   },

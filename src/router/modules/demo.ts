@@ -5,9 +5,11 @@ const router = {
   name: "demoLayout",
   component: Layout,
   meta: {
+    icon:'sgn-demo',
     title: "demo小样",
+    isComponent:false,
     showLink: true,
-    sort:2
+    sort:2,
   },
   children: [
     {
@@ -17,7 +19,11 @@ const router = {
       meta: {
         title: "demo小样",
         showLink: true,
-        sort:2
+        sort:2,
+        extraIcon:{
+          svg:true,
+          name:'sgn-new'
+        }
       }
     }
   ]

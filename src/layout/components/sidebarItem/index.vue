@@ -7,6 +7,8 @@ export default {
 import path from 'path-browserify'
 import { PropType, ref, nextTick } from "vue";
 import { childrenType } from "../../types";
+import Icon from "@/components/Icon/src/Icon.vue";
+import { findIconReg } from "@/components/Icon";
 
 const props = defineProps({
   item: {
@@ -45,10 +47,7 @@ function hoverMenu(key) {
   });
 }
 
-function hasOneShowingChild(
-  children: childrenType[] = [],
-  parent: childrenType
-) {
+function hasOneShowingChild(children: childrenType[] = [],parent: childrenType) {
   const showingChildren = children.filter((item: any) => {
     onlyOneChild.value = item;
     return true;
@@ -82,6 +81,10 @@ function resolvePath(routePath) {
       :class="{ 'submenu-title-noDropdown': !isNest }"
       style="display: flex; align-items: center"
     >
+      <el-icon v-show="props.item.meta.icon">
+        <component v-if="onlyOneChild.meta.isComponent||props.item.meta.isComponent" :is="findIconReg(onlyOneChild.meta.icon ||(props.item.meta && props.item.meta.icon))"></component>
+        <Icon v-else :svg="true" :content="`${onlyOneChild.meta.icon ||(props.item.meta && props.item.meta.icon)}`" />
+      </el-icon>
       <template #title>
         <div
           :style="{
@@ -112,9 +115,10 @@ function resolvePath(routePath) {
               {{ onlyOneChild.meta.title }}
             </span>
           </el-tooltip>
-          <svg-icon
-            v-if="props.item.meta.extraIcon"
-            :icon-class="`${props.item.meta.extraIcon.name}`"
+          <Icon
+            v-if="onlyOneChild.meta.extraIcon"
+            :svg="onlyOneChild.meta.extraIcon.svg ? true : false"
+            :content="`${onlyOneChild.meta.extraIcon.name}`"
           />
         </div>
       </template>
@@ -123,6 +127,10 @@ function resolvePath(routePath) {
 
   <el-sub-menu v-else ref="subMenu" :index="resolvePath(props.item.path)" popper-append-to-body>
     <template #title>
+      <el-icon v-show="props.item.meta.icon">
+        <component v-if="props.item.meta.isComponent" :is="findIconReg(props.item.meta && props.item.meta.icon)"></component>
+        <Icon v-else :svg="true" :content="`${props.item.meta && props.item.meta.icon}`" />
+      </el-icon>
       <el-tooltip
         placement="top"
         :offset="-10"
@@ -145,9 +153,10 @@ function resolvePath(routePath) {
           </span>
         </div>
       </el-tooltip>
-      <svg-icon
+      <Icon
         v-if="props.item.meta.extraIcon"
-        :icon-class="`${props.item.meta.extraIcon.name}`"
+        :svg="props.item.meta.extraIcon.svg ? true : false"
+        :content="`${props.item.meta.extraIcon.name}`"
       />
     </template>
     <sidebar-item

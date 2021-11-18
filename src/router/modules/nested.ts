@@ -6,6 +6,8 @@ const router = {
   component: Layout,
   redirect: "/nested/menu1/menu1-1",
   meta:{
+    icon:'icon-xitongshiti',
+    isComponent:false,
     sort:3,
     showLink:true,
     title:"嵌套路由"

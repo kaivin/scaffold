@@ -78,20 +78,20 @@ const clickHandle = () => {
 
 <template>
   <i
-    v-if="!props.svg&&props.content.indexOf('svg-icon-')===-1"
+    v-if="!props.svg&&props.content.indexOf('sgn-')===-1"
     :class="className"
     :style="iconStyle"
     v-html="text"
     @click="clickHandle"
   ></i>
   <svg
-    class="icon-svg"
-    v-if="props.svg&&props.content.indexOf('svg-icon-')===-1"
+    class="svg-icon"
+    v-if="props.svg&&props.content.indexOf('sgn-')===-1"
     aria-hidden="true"
     :style="iconStyle"
     @click="clickHandle"
   >
     <use :xlink:href="`#${props.content}`" />
   </svg>
-  <svg-icon v-if="props.svg&&props.content.indexOf('svg-icon-')>-1" :icon-class="props.content.split('svg-icon-')[1]"></svg-icon>
+  <svg-icon v-if="props.svg&&props.content.indexOf('sgn-')>-1" :icon-class="props.content"></svg-icon>
 </template>

@@ -19,8 +19,8 @@ const value1 = ref("")
     <Icon :content="'iconfont-star'"/>
     <el-icon><component :is="findIconReg('HomeFilled')"></component></el-icon>
     <Icon :content="'el-icon-user'"/>
-    <Icon :svg="true" :content="'svg-icon-close'"/>
-    <svg-icon icon-class="close"></svg-icon>
+    <Icon :svg="true" :content="'sgn-close'"/>
+    <svg-icon icon-class="sgn-close"></svg-icon>
     <el-date-picker v-model="value1" type="date" placeholder="Pick a day"></el-date-picker>
   </div>
 </template>

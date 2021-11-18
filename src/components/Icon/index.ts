@@ -1,4 +1,4 @@
-﻿import { App, defineComponent,defineAsyncComponent  } from "vue";
+﻿import { App, defineComponent  } from "vue";
 import icon from "./src/Icon.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { iconComponents } from "@/plugins/element-plus";

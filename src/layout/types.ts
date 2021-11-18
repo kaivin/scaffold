@@ -27,6 +27,7 @@ export type childrenType = {
   value: unknown;
   meta?: {
     icon?: string;
+    isComponent?:boolean;
     title?: string;
     extraIcon?: {
       svg?: boolean;

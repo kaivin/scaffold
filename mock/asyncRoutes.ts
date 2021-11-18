@@ -6,7 +6,8 @@ const systemRouter = {
   name: "system",
   redirect: "/system/user",
   meta: {
-    icon: "menu-system",
+    icon: "sgn-menu-system",
+    isComponent:false,
     title: "设置",
     showLink: true,
     sort: 10

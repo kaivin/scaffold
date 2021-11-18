@@ -115,12 +115,12 @@ function resolvePath(routePath) {
               {{ onlyOneChild.meta.title }}
             </span>
           </el-tooltip>
-          <Icon
-            v-if="onlyOneChild.meta.extraIcon"
-            :svg="onlyOneChild.meta.extraIcon.svg ? true : false"
-            :content="`${onlyOneChild.meta.extraIcon.name}`"
-          />
         </div>
+        <el-icon class="tag-icon" v-if="onlyOneChild.meta.extraIcon">
+        <Icon
+          :svg="onlyOneChild.meta.extraIcon.svg ? true : false"
+          :content="`${onlyOneChild.meta.extraIcon.name}`"
+        /></el-icon>
       </template>
     </el-menu-item>
   </template>
@@ -153,11 +153,10 @@ function resolvePath(routePath) {
           </span>
         </div>
       </el-tooltip>
-      <Icon
-        v-if="props.item.meta.extraIcon"
+      <el-icon class="tag-icon" v-if="props.item.meta.extraIcon"><Icon
         :svg="props.item.meta.extraIcon.svg ? true : false"
         :content="`${props.item.meta.extraIcon.name}`"
-      />
+      /></el-icon>
     </template>
     <sidebar-item
       v-for="child in props.item.children"

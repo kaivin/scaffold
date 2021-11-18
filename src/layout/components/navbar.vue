@@ -1,9 +1,17 @@
 ﻿<script setup lang="ts">
-
+import Hamburger from "./hamBurger/index.vue";
+import { useStore } from 'vuex'
+const store = useStore()
+const sidebar = store.state.app.sidebar
+function toggleSideBar() {
+  store.dispatch("app/toggleSideBar")
+}
 </script>
 
 <template>
-  <div class="navbar"></div>
+  <div class="navbar">
+      <Hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+  </div>
 </template>
 
 <style lang="scss" scoped>

@@ -3,10 +3,16 @@ import navbar from "./components/navbar.vue";
 import appMain from "./components/appMain.vue";
 import Vertical from "./components/vertical.vue";
 import tags from "./components/tags.vue";
+import { useStore } from 'vuex'
+const store = useStore()
+import { computed } from "vue";
+const sidebar = computed(() => {
+  return store.state.app.sidebar;
+});
 </script>
 
 <template>
-  <div class="app-wrapper">
+  <div :class="['app-wrapper',sidebar.opened?'':'hideSidebar',sidebar.withoutAnimation?'withoutAnimation':'']">
     <!-- 侧边导航栏 -->
     <Vertical />
     <div class="main-container">

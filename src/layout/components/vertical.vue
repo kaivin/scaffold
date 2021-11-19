@@ -7,6 +7,9 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const store = useStore()
 const menuList = store.state.routes.wholeRoutes
+const isCollapse = computed(() => {
+  return !store.state.app.sidebar.opened;
+});
 const activeMenu = computed((): string => {
   const { meta, path } = route;
   if (meta.activeMenu) {
@@ -23,6 +26,7 @@ const activeMenu = computed((): string => {
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
+        :collapse="isCollapse"
         unique-opened
         router
         :collapse-transition="false"

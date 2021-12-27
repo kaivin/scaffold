@@ -1,0 +1,46 @@
+﻿<script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const activeName = ref("tag");
+function toDetail(index: number) {
+  router.push(`/tabs/detail/${index}`);
+}
+</script>
+
+<template>
+  <el-collapse v-model="activeName" class="tabs-container">
+    <el-collapse-item
+      title="标签页复用超出限制自动关闭(使用场景: 动态路由)"
+      name="tag"
+    >
+      <el-button
+        v-for="index in 12"
+        :key="index"
+        size="medium"
+        @click="toDetail(index)"
+      >
+        打开{{ index }}详情页
+      </el-button>
+    </el-collapse-item>
+  </el-collapse>
+</template>
+
+<style lang="scss" scoped>
+.tabs-container {
+  padding: 10px;
+  background: #fff;
+
+  ::v-deep(.el-collapse-item__header) {
+    line-height: 20px;
+  }
+
+  ::v-deep(.el-collapse-item__wrap) {
+    border-bottom: none;
+  }
+
+  button {
+    margin: 10px;
+  }
+}
+</style>

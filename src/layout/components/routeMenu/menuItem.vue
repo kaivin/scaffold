@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
 export default {
-  name: "sidebar-item"
+  name: "menu-item"
 };
 </script>
 <script setup lang="ts">
@@ -9,6 +9,7 @@ import { PropType, ref, nextTick } from "vue";
 import { childrenType } from "../../types";
 import Icon from "@/components/Icon/src/Icon.vue";
 import { findIconReg } from "@/components/Icon";
+import { transformI18n } from "@/plugins/i18n";
 
 const props = defineProps({
   item: {
@@ -76,89 +77,43 @@ function resolvePath(routePath) {
 
 <template>
   <template v-if="hasOneShowingChild(props.item.children, props.item)&&(!onlyOneChild.children || onlyOneChild.noShowingChildren)">
-    <el-menu-item
-      :index="resolvePath(onlyOneChild.path)"
-      :class="{ 'submenu-title-noDropdown': !isNest }"
-      style="display: flex; align-items: center"
-    >
+    <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }" >
       <el-icon v-show="props.item.meta.icon">
         <component v-if="onlyOneChild.meta.isComponent||props.item.meta.isComponent" :is="findIconReg(onlyOneChild.meta.icon ||(props.item.meta && props.item.meta.icon))"></component>
         <Icon v-else :svg="true" :content="`${onlyOneChild.meta.icon ||(props.item.meta && props.item.meta.icon)}`" />
       </el-icon>
       <template #title>
-        <div
-          :style="{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            overflow: 'hidden'
-          }"
-        >
-          <el-tooltip
-            placement="top"
-            :offset="-10"
-            :disabled="!onlyOneChild.showTooltip"
-          >
+        <div class="menu-title">
+          <el-tooltip placement="top" :offset="-10" :disabled="!onlyOneChild.showTooltip">
             <template #content>
-              {{ onlyOneChild.meta.title }}
+              {{ transformI18n(onlyOneChild.meta.title, onlyOneChild.meta.i18n) }}
             </template>
-            <span
-              ref="menuTextRef"
-              :style="{
-                width: '125px',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }"
-              @mouseover="hoverMenu(onlyOneChild)"
-            >
-              {{ onlyOneChild.meta.title }}
-            </span>
+            <span ref="menuTextRef" @mouseover="hoverMenu(onlyOneChild)">{{ transformI18n(onlyOneChild.meta.title, onlyOneChild.meta.i18n) }}</span>
           </el-tooltip>
         </div>
         <el-icon class="tag-icon" v-if="onlyOneChild.meta.extraIcon">
-        <Icon
-          :svg="onlyOneChild.meta.extraIcon.svg ? true : false"
-          :content="`${onlyOneChild.meta.extraIcon.name}`"
-        /></el-icon>
+          <Icon :svg="onlyOneChild.meta.extraIcon.svg ? true : false" :content="`${onlyOneChild.meta.extraIcon.name}`" />
+        </el-icon>
       </template>
     </el-menu-item>
   </template>
-
   <el-sub-menu v-else ref="subMenu" :index="resolvePath(props.item.path)" popper-append-to-body>
     <template #title>
       <el-icon v-show="props.item.meta.icon">
         <component v-if="props.item.meta.isComponent" :is="findIconReg(props.item.meta && props.item.meta.icon)"></component>
         <Icon v-else :svg="true" :content="`${props.item.meta && props.item.meta.icon}`" />
       </el-icon>
-      <el-tooltip
-        placement="top"
-        :offset="-10"
-        :disabled="!props.item.showTooltip"
-      >
-        <template #content>
-          {{ props.item.meta.title }}
-        </template>
-        <div
-          ref="menuTextRef"
-          :style="{
-            display: 'inline-block',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis'
-          }"
-          @mouseover="hoverMenu(props.item)"
-        >
-          <span style="overflow: hidden; text-overflow: ellipsis">
-            {{ props.item.meta.title }}
-          </span>
+      <el-tooltip placement="top" :offset="-10" :disabled="!props.item.showTooltip" >
+        <template #content>{{ transformI18n(props.item.meta.title, props.item.meta.i18n) }}</template>
+        <div ref="menuTextRef" class="menu-title" @mouseover="hoverMenu(props.item)" >
+          <span>{{ transformI18n(props.item.meta.title, props.item.meta.i18n) }}</span>
         </div>
       </el-tooltip>
-      <el-icon class="tag-icon" v-if="props.item.meta.extraIcon"><Icon
-        :svg="props.item.meta.extraIcon.svg ? true : false"
-        :content="`${props.item.meta.extraIcon.name}`"
-      /></el-icon>
+      <el-icon class="tag-icon" v-if="props.item.meta.extraIcon">
+        <Icon :svg="props.item.meta.extraIcon.svg ? true : false" :content="`${props.item.meta.extraIcon.name}`" />
+      </el-icon>
     </template>
-    <sidebar-item
+    <menu-item
       v-for="child in props.item.children"
       :key="child.path"
       :is-nest="true"

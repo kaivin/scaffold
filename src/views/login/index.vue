@@ -9,8 +9,8 @@ import info, { ContextProps } from "./components/default/index.vue";
 
 const router = useRouter();
 const contextInfo: ContextProps = reactive({
-  userName: "",
-  passWord: "",
+  userName: "admin",
+  passWord: "123456",
 });
 const toPage = (info: Object): void => {
   storageSession.setItem("userInfo", info);
@@ -23,12 +23,14 @@ const onLogin = async () => {
     username: userName,
     password: passWord,
   });
-  const userInfo:any = data;
-  userInfo.accessToken = accessToken
-  code === 0
-    ? successMessage(info) &&
-      toPage(userInfo)
-    : warnMessage(info);
+  if(code==200){
+    const userInfo:any = data;
+    userInfo.accessToken = accessToken;
+    successMessage(info)
+    toPage(userInfo)
+  }else{
+    warnMessage(info);
+  }
 };
 
 </script>

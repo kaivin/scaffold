@@ -10,7 +10,9 @@ const router = {
     isComponent:false,
     sort:3,
     showLink:true,
-    title:"嵌套路由"
+    i18n:true,
+    title: "message.hsmenus",
+    keepAlive:true,
   },
   children:[
     {
@@ -21,7 +23,9 @@ const router = {
       meta:{
         sort:1,
         showLink:true,
-        title:"嵌套路由1"
+        i18n:true,
+        title: "message.hsmenu1",
+        keepAlive:true,
       },
       children: [
           {
@@ -31,7 +35,9 @@ const router = {
               meta:{
                 sort:1,
                 showLink:true,
-                title:"嵌套路由1-1"
+                i18n:true,
+                title: "message.hsmenu1-1",
+                keepAlive:true,
               },
           },
           {
@@ -42,7 +48,9 @@ const router = {
               meta:{
                 sort:2,
                 showLink:true,
-                title:"嵌套路由1-2"
+                i18n:true,
+                title: "message.hsmenu1-2",
+                keepAlive:true,
               },
               children: [
                   {
@@ -52,7 +60,9 @@ const router = {
                       meta:{
                         sort:1,
                         showLink:true,
-                        title:"嵌套路由1-2-1"
+                        i18n:true,
+                        title: "message.hsmenu1-2-1",
+                        keepAlive:true,
                       },
                   },
                   {
@@ -62,7 +72,8 @@ const router = {
                       meta:{
                         sort:2,
                         showLink:true,
-                        title:"嵌套路由1-2-2"
+                        i18n:true,
+                        title: "message.hsmenu1-2-2",
                       },
                   }
               ]
@@ -74,7 +85,8 @@ const router = {
               meta:{
                 sort:3,
                 showLink:true,
-                title:"嵌套路由1-3"
+                i18n:true,
+                title: "message.hsmenu1-3",
               },
           }
       ]
@@ -86,7 +98,8 @@ const router = {
         meta:{
           sort:2,
           showLink:true,
-          title:"嵌套路由2"
+          i18n:true,
+          title: "message.hsmenu2",
         },
     }
   ]

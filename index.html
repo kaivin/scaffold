@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title></title>
+    <script>
+      var lang = JSON.parse(localStorage.getItem("responsive-locale"));
+      if(lang&&lang.locale=="en"){
+        document.title = "scaffold";
+      }else{
+        document.title = "脚手架";
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>

@@ -1,11 +1,13 @@
 import { storageLocal } from "@/utils/storage";
 import { Module } from 'vuex'
+import { getConfig } from "@/config";
 
 interface AppState {
     sidebar: {
       opened: boolean;
       withoutAnimation: boolean;
     };
+    frame: string;
 }
 
 const appModule: Module<AppState,any> = {
@@ -16,7 +18,8 @@ const appModule: Module<AppState,any> = {
             ? !!+storageLocal.getItem("sidebarStatus")
             : true,
             withoutAnimation:false
-        }
+        },
+        frame: storageLocal.getItem("responsive-layout")?.frame ?? getConfig().Frame,
     },
     mutations:{
         TOGGLE_SIDEBAR:(state)=> {
@@ -41,6 +44,9 @@ const appModule: Module<AppState,any> = {
         closeSideBar({commit},{withoutAnimation}) {
             commit('CLOSE_SIDEBAR', withoutAnimation);
         },
+        setFrame({state},frame){
+            state.frame = frame;
+        }
     }
   };
   export default appModule

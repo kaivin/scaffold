@@ -68,3 +68,21 @@ ul {
   background: url("../assets/login.jpg") no-repeat center;
   background-size: cover;
 }
+
+/* 灰色模式 */
+.html-grey {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+}
+
+/* 色弱模式 */
+.html-weakness {
+  filter: invert(80%);
+  -webkit-filter: invert(80%);
+  -moz-filter: invert(80%);
+  -ms-filter: invert(80%);
+  -o-filter: invert(80%);
+}

@@ -39,7 +39,7 @@ function handleClickIncrement() {
 </template>
 
 <style scoped lang="scss">
-@import "@/style/-settings.scss";
+@import "@/style/-mixin.scss";
 a {color:$pink}
 
 label {

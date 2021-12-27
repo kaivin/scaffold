@@ -1,7 +1,12 @@
-﻿@charset "UTF-8";
-@import "./-settings.scss";
+﻿
+@import "./mixin.scss";
 @import "./-public.scss";
-@import "./-layout.scss";
+@import "./layout.scss";
+@import "./-header.scss";
+@import "./-settings.scss";
+@import "./-tags.scss";
+@import "./-transition.scss";
+
 .demo{
   color: $red;
 }

@@ -37,7 +37,15 @@ import {
   ElDescriptions,
   ElDescriptionsItem,
   ElBacktop,
-  ElSwitch
+  ElSwitch,
+  ElBadge,
+  ElTabs,
+  ElTabPane,
+  ElAvatar,
+  ElEmpty,
+  ElCollapse,
+  ElCollapseItem,
+  ElInfiniteScroll
 } from "element-plus";
 
 import {
@@ -54,7 +62,8 @@ import {
   RefreshRight,
   ArrowDown,
   Close,
-  CloseBold
+  CloseBold,
+  Bell
 } from "@element-plus/icons";
 
 const components:any[] = [
@@ -94,7 +103,14 @@ const components:any[] = [
   ElDescriptions,
   ElDescriptionsItem,
   ElBacktop,
-  ElSwitch
+  ElSwitch,
+  ElBadge,
+  ElTabs,
+  ElTabPane,
+  ElAvatar,
+  ElEmpty,
+  ElCollapse,
+  ElCollapseItem
 ];
 // icon
 export const iconComponents = [
@@ -111,9 +127,10 @@ export const iconComponents = [
   RefreshRight,
   ArrowDown,
   Close,
-  CloseBold
+  CloseBold,
+  Bell
 ];
-const plugins = [ElLoading];
+const plugins = [ElLoading,ElInfiniteScroll];
 
 export function useElementPlus(app: App) {
     components.push(...iconComponents);

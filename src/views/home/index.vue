@@ -1,4 +1,9 @@
-﻿<script setup lang="ts">
+﻿<script lang="ts">
+export default {
+  name: "home"
+};
+</script>
+<script setup lang="ts">
 
 import { ref } from 'vue'
 import HelloWorld from '@/components/HelloWorld.vue'
@@ -21,7 +26,7 @@ const value1 = ref("")
     <Icon :content="'el-icon-user'"/>
     <Icon :svg="true" :content="'sgn-close'"/>
     <svg-icon icon-class="sgn-close"></svg-icon>
-    <el-date-picker v-model="value1" type="date" placeholder="Pick a day"></el-date-picker>
+    <el-date-picker v-model="value1" type="date" :placeholder="$t('message.hsDatePlaceholder')"></el-date-picker>
   </div>
 </template>
 

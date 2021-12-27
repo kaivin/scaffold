@@ -1,8 +1,8 @@
 ﻿<script setup lang="ts">
 import { ref, PropType, getCurrentInstance, toRef } from "vue";
 import { useRouter } from "vue-router";
-import { initRouter } from "@/router";
-import { storageSession } from "@/utils/storage";
+import { transformI18n } from "@/plugins/i18n";
+import Icon from "@/components/Icon/src/Icon.vue";
 
 export interface ContextProps {
   userName: string;
@@ -26,10 +26,10 @@ const model = toRef(props, "ruleForm");
 const router = useRouter();
 
 const rules = ref<any>({
-  userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+  userName: [{ required: true, message: transformI18n('message.hsUsernamePlaceholder', true), trigger: "blur" }],
   passWord: [
-    { required: true, message: "请输入密码", trigger: "blur" },
-    { min: 6, message: "密码长度必须不小于6位", trigger: "blur" }
+    { required: true, message: transformI18n('message.hsPasswordPlaceholder', true), trigger: "blur" },
+    { min: 6, message: transformI18n('message.hsPasswordRequired', true), trigger: "blur" }
   ],
 });
 
@@ -44,20 +44,6 @@ const onBehavior = (evt: Object): void => {
     }
   });
 };
-
-// 表单重置
-const resetForm = (): void => {
-  // @ts-expect-error
-  instance.refs.ruleForm.resetFields();
-};
-
-const noSecret = (): void => {
-  storageSession.setItem("userInfo", {
-    accessToken: "eyJhbGciOiJIUzUxMiJ9"
-  });
-  initRouter().then(() => {});
-  router.push("/");
-};
 </script>
 
 <template>
@@ -67,8 +53,7 @@ const noSecret = (): void => {
         <el-input
           clearable
           v-model="model.userName"
-          placeholder="请输入用户名"
-          prefix-icon="el-icon-user"
+          :placeholder="$t('message.hsUsernamePlaceholder')"
         ></el-input>
       </el-form-item>
       <el-form-item prop="passWord">
@@ -77,15 +62,12 @@ const noSecret = (): void => {
           type="password"
           show-password
           v-model="model.passWord"
-          placeholder="请输入密码"
-          prefix-icon="el-icon-lock"
+          :placeholder="$t('message.hsPasswordPlaceholder')"
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click.prevent="onBehavior">登录</el-button>
-        <el-button @click="resetForm">重置</el-button>
+        <el-button type="primary" @click.prevent="onBehavior">{{$t("message.hslogin")}}</el-button>
       </el-form-item>
-      <span title="测试用户 直接登录" class="secret" @click="noSecret">免密登录</span>
     </el-form>
   </div>
 </template>

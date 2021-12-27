@@ -19,7 +19,7 @@ const toggleClick = () => {
 <template>
   <div
     :class="classes.container"
-    :title="props.isActive ? '点击折叠' : '点击展开'"
+    :title="props.isActive ? $t('message.hsfold') : $t('message.hsunfold')"
     @click="toggleClick"
   >
     <svg

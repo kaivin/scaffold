@@ -8,7 +8,8 @@ const errorRouter = {
   meta: {
     icon: "Position",
     isComponent:true,
-    title: "错误页面",
+    i18n:true,
+    title: "message.hserror",
     showLink: true,
     sort: 7
   },
@@ -18,7 +19,8 @@ const errorRouter = {
       name: "401",
       component: () => import("@/views/error/401/index.vue"),
       meta: {
-        title: "401",
+        i18n:true,
+        title: "message.hsfourZeroOne",
         showLink: true
       }
     },
@@ -27,7 +29,8 @@ const errorRouter = {
       name: "404",
       component: () => import("@/views/error/404/index.vue"),
       meta: {
-        title: "404",
+        i18n:true,
+        title: "message.hsfourZeroFour",
         showLink: true
       }
     }

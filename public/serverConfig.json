@@ -1,0 +1,15 @@
+﻿{
+  "Version": "1.0.0",
+  "Title": "message.hsTitle",
+  "Locale": "zh",
+  "Grey": false,
+  "Weak": false,
+  "SidebarLogo": true,
+  "HideTabs": false,
+  "MultiTagsCache": false,
+  "KeepAlive": true,
+  "HiddenSideBar":false,
+  "TagStyleMode":"card",
+  "Frame": "leftRight",
+  "Theme": "default"
+}

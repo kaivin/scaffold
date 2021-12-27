@@ -1,10 +1,9 @@
 ﻿<script setup lang="ts">
-import { useStore } from 'vuex'
-const store = useStore()
-const count = store.state.count
+import { ref } from 'vue'
+const value1 = ref("")
 </script>
 <template>
-  <h2>vuex中的count：{{count}}</h2>
+  <el-date-picker v-model="value1" type="date" :placeholder="$t('message.hsDatePlaceholder')"></el-date-picker>
 </template>
 
 <style>

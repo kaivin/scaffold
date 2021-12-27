@@ -8,6 +8,7 @@ const router = {
     icon:'fa-house-damage',
     isComponent:true,
     showLink: true,
+    i18n:true,
     sort:1
   },
   children: [
@@ -16,7 +17,9 @@ const router = {
       name: "home",
       component: () => import("@/views/home/index.vue"),
       meta: {
-        title: "首页",
+        i18n:true,
+        title: "message.hshome",
+        keepAlive:true,
         showLink: true,
         sort:1
       }

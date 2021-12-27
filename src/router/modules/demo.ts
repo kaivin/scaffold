@@ -2,14 +2,16 @@
 
 const router = {
   path: "/demo",
-  name: "demoLayout",
+  name: "demo",
   component: Layout,
   meta: {
     icon:'sgn-demo',
-    title: "demo小样",
+    i18n:true,
+    title: "message.hsdemo",
     isComponent:false,
     showLink: true,
     sort:2,
+    breadcrumb:false,
   },
   children: [
     {
@@ -17,7 +19,8 @@ const router = {
       name: "demo",
       component: () => import("@/views/demo/index.vue"),
       meta: {
-        title: "demo小样",
+        i18n:true,
+        title: "message.hsdemo",
         showLink: true,
         sort:2,
         extraIcon:{

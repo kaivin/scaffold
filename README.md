@@ -3,6 +3,13 @@ node14.18.1 + volar + vite2.x + vue3.x + vue-router4.x + vuex4.x + element-plus 
 
 # 目前实现的功能
 
+## 2021-12-14
+
+1. 侧边导航折叠功能组件实现
+2. 面包屑功能组件实现
+3. 用户头像、用户名信息展示、退出登录功能实现
+4. 新增`remixicon`图标库
+
 ## 2021-11-15
 
 1. `scss`引入
@@ -38,7 +45,7 @@ yarn
 3. 运行开发环境
 
 ```
-yarn start
+yarn dev
 ```
 
 4. 输出生产环境

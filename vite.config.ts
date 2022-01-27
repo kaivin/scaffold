@@ -70,7 +70,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         "element-plus/lib/locale/lang/zh-cn",
         "element-plus/lib/locale/lang/en",
       ],
-      exclude: ["@zougt/vite-plugin-theme-preprocessor/dist/browser-utils"]
+      // exclude: ["@zougt/vite-plugin-theme-preprocessor/dist/browser-utils"]
     },
 		plugins: [
 			vue(),
